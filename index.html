@@ -3,215 +3,322 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miquel</title>
-<meta name="description" content="Miquel — I build things I wish existed. Yumlist and La Virage Club. Barcelona.">
-<!-- Favicon (emoji, no necesita archivo aparte) -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
-<!-- Open Graph: así se ve bonito al compartir el enlace en redes/WhatsApp -->
-<meta property="og:title" content="Miquel — I build things I wish existed">
-<meta property="og:description" content="Building Yumlist & La Virage Club. Sharing the messy road as I go.">
+<title>Miquel Subias — Building Yumlist &amp; La Virage Club</title>
+<meta name="description" content="Miquel Subias — I build things I wish existed. Building Yumlist and La Virage Club from Cervera, Catalonia.">
+<link rel="canonical" href="https://mdemike.com/">
+<meta name="theme-color" content="#f7f5f0">
+<meta name="color-scheme" content="light">
+<!-- Favicon: "m" crema sobre cuadro oscuro -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Open Graph: así se ve al compartir el enlace en redes/WhatsApp -->
+<meta property="og:title" content="Miquel Subias — I build things I wish existed">
+<meta property="og:description" content="Building Yumlist &amp; La Virage Club. Sharing the messy road as I go.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://mdemike.com">
+<meta property="og:url" content="https://mdemike.com/">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a0a0b;
-    --fg:#f6f5f3;
-    --dim:#9a9894;
-    --dimmer:#5c5a57;
-    --line:rgba(255,255,255,.1);
-    --pill:rgba(255,255,255,.06);
-    --pill-hover:rgba(255,255,255,.1);
+    /* color */
+    --bg:#f7f5f0;          /* hueso */
+    --ink:#1a1a18;         /* texto principal — 16.6:1 sobre --bg */
+    --muted:#5a564e;       /* texto secundario — 6.7:1 sobre --bg */
+    --line:#e2ded5;
+    --line-strong:#cfc9bd;
+
+    /* type */
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+    --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+
+    /* spacing — múltiplos de 4/8 */
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+    --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+
+    --radius:16px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
-    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    font-family:var(--sans);
+    font-size:16px;
     background:var(--bg);
-    color:var(--fg);
+    color:var(--ink);
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
-    min-height:100dvh;
+  }
+  a{color:inherit}
+  a:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:4px}
+
+  .wrap{
+    max-width:680px;
+    margin:0 auto;
+    padding:var(--s8) var(--s5) var(--s7);
+    animation:rise .8s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* serif italic accents — solo para palabras clave */
+  em{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+    letter-spacing:0;
+  }
+
+  /* ---------- identity ---------- */
+  .me{
     display:flex;
     align-items:center;
-    justify-content:center;
-    padding:48px 24px;
+    gap:var(--s3);
+    margin-bottom:var(--s8);
   }
-  .wrap{
-    width:100%;
-    max-width:640px;
-    text-align:center;
-    animation:fade .9s ease both;
+  .me img{
+    width:48px;height:48px;
+    border-radius:50%;
+    object-fit:cover;
+    background:var(--line);
+    flex-shrink:0;
   }
-  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .me-name{font-weight:600;line-height:1.25}
+  .me-where{color:var(--muted);font-size:14px;line-height:1.25;margin-top:2px}
 
-  /* the thesis — big and centered */
+  /* ---------- thesis ---------- */
   h1{
-    font-size:clamp(40px,8.5vw,68px);
+    font-size:clamp(44px,10vw,80px);
     font-weight:700;
-    letter-spacing:-.035em;
-    line-height:1.02;
-    margin-bottom:34px;
+    letter-spacing:-.04em;
+    line-height:1;
+    margin-bottom:var(--s5);
+    text-wrap:balance;
   }
+  h1 em{font-size:1.1em;line-height:.9}
 
-  /* social pills with colored icons */
-  .socials{
+  .intro{
+    font-size:clamp(18px,2.6vw,20px);
+    color:var(--muted);
+    line-height:1.55;
+    max-width:34ch;
+    margin-bottom:var(--s8);
+  }
+  .intro em{color:var(--ink);font-size:1.12em}
+
+  /* ---------- projects ---------- */
+  .label{
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:var(--s4);
+  }
+  .projects{
+    list-style:none;
+    display:grid;
+    gap:var(--s3);
+    margin-bottom:var(--s8);
+  }
+  .project{
+    --c:#888;
     display:flex;
-    justify-content:center;
-    gap:10px;
+    align-items:center;
+    gap:var(--s4);
+    padding:var(--s4);
+    padding-right:var(--s5);
+    text-decoration:none;
+    border-radius:var(--radius);
+    background:color-mix(in srgb,var(--c) 10%,var(--bg));
+    border:1px solid color-mix(in srgb,var(--c) 28%,var(--bg));
+    transition:background .2s ease,transform .2s ease;
+  }
+  .project-mark{
+    width:56px;height:56px;
+    border-radius:12px;
+    background:var(--c);
+    color:var(--mark-ink,#fff);
+    display:grid;
+    place-items:center;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:36px;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .project-text{flex:1;min-width:0}
+  .project-name{
+    display:block;
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:-.015em;
+    line-height:1.3;
+  }
+  .project-desc{
+    display:block;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.45;
+    margin-top:2px;
+  }
+  .project-arrow{
+    font-size:20px;
+    flex-shrink:0;
+    transition:transform .2s ease;
+  }
+  @media (hover:hover){
+    .project:hover{background:color-mix(in srgb,var(--c) 18%,var(--bg))}
+    .project:hover .project-arrow{transform:translate(3px,-3px)}
+  }
+  .project:active{transform:scale(.99)}
+
+  /* ---------- socials ---------- */
+  .socials{
+    list-style:none;
+    display:flex;
     flex-wrap:wrap;
-    margin-bottom:30px;
+    gap:var(--s2) var(--s5);
+    margin-bottom:var(--s9);
   }
   .socials a{
     display:inline-flex;
     align-items:center;
-    gap:8px;
+    gap:var(--s2);
+    padding:var(--s1) 0;
     text-decoration:none;
-    color:var(--fg);
-    font-size:14.5px;
-    font-weight:500;
-    background:var(--pill);
-    border:1px solid var(--line);
-    border-radius:999px;
-    padding:8px 15px 8px 12px;
-    transition:background .16s ease;
+    color:var(--muted);
+    font-size:16px;
+    transition:color .16s ease;
   }
-  .socials a:hover{background:var(--pill-hover)}
-  .socials svg{width:17px;height:17px;flex-shrink:0}
+  .socials svg{width:16px;height:16px;flex-shrink:0}
+  @media (hover:hover){.socials a:hover{color:var(--ink)}}
 
-  /* intro line */
-  .intro{
-    font-size:clamp(15px,4vw,17px);
-    color:var(--dim);
-    line-height:1.6;
-    max-width:40ch;
-    margin:0 auto 40px;
+  /* ---------- footer ---------- */
+  .foot{
+    padding-top:var(--s5);
+    border-top:1px solid var(--line);
+    font-size:14px;
+    color:var(--muted);
   }
 
-  /* projects — inline, elegant, not boxes */
-  .projects{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px 18px;
-    flex-wrap:wrap;
-    margin-bottom:44px;
+  @media (max-width:480px){
+    .wrap{padding:var(--s7) var(--s4) var(--s6)}
+    .me{margin-bottom:var(--s7)}
+    .intro,.projects{margin-bottom:var(--s7)}
+    .socials{margin-bottom:var(--s8)}
+    .project{gap:var(--s3);padding:var(--s3);padding-right:var(--s4)}
+    .project-mark{width:48px;height:48px;font-size:30px;border-radius:10px}
+    .project-name{font-size:18px}
   }
-  .projects a{
-    text-decoration:none;
-    color:var(--fg);
-    font-size:15px;
-    font-weight:500;
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    transition:opacity .16s ease;
-  }
-  .projects a:hover{opacity:.65}
-  .projects a .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-  .projects a .yumdot{background:#e07a4c}
-  .projects a .vdot{background:#c8a24b}
-  .projects a .arr{color:var(--dimmer);font-size:12px}
-  .projects .sep{color:var(--dimmer);font-size:13px}
-
-  /* email */
-  form{
-    display:flex;
-    gap:8px;
-    max-width:400px;
-    margin:0 auto 14px;
-  }
-  input[type=email]{
-    flex:1;min-width:0;
-    font-family:inherit;font-size:15px;color:var(--fg);
-    background:rgba(255,255,255,.05);
-    border:1px solid var(--line);
-    border-radius:11px;
-    padding:13px 16px;
-    text-align:center;
-    transition:border-color .16s ease,background .16s ease;
-  }
-  input[type=email]:focus{outline:none;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.07)}
-  input[type=email]::placeholder{color:var(--dimmer)}
-  button{
-    font-family:inherit;font-size:15px;font-weight:600;
-    color:var(--bg);background:var(--fg);cursor:pointer;
-    border:none;border-radius:11px;padding:13px 22px;white-space:nowrap;
-    transition:opacity .16s ease;
-  }
-  button:hover{opacity:.85}
-  .msg{font-size:13.5px;color:var(--dim);min-height:1.2em;margin-bottom:44px}
-  .msg.ok{color:var(--fg)}
-
-  .foot{font-size:12.5px;color:var(--dimmer)}
 
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
   <main class="wrap">
-    <h1>I build things<br>I wish existed.</h1>
 
-    <div class="socials">
-      <a href="https://www.youtube.com/@mdemikee" target="_blank" rel="noopener" aria-label="YouTube">
-        <svg viewBox="0 0 24 24"><path fill="#FF0000" d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.7-1.7C19.4 5.2 12 5.2 12 5.2s-7.4 0-8.9.4A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.7 1.7c1.5.4 8.9.4 8.9.4s7.4 0 8.9-.4a2.5 2.5 0 0 0 1.7-1.7C23 15.2 23 12 23 12z"/><path fill="#fff" d="M9.8 15.3V8.7l5.7 3.3z"/></svg>
-        @mdemikee
-      </a>
-      <a href="https://x.com/mdemike___" target="_blank" rel="noopener" aria-label="Twitter">
-        <svg viewBox="0 0 24 24" fill="#fff"><path d="M18.9 1.6h3.5l-7.6 8.7L23.7 22h-7l-5.5-7.2L4.9 22H1.4l8.1-9.3L.6 1.6h7.2l5 6.6zm-1.2 18.3h1.9L6.9 3.6H4.8z"/></svg>
-        @mdemike___
-      </a>
-      <a href="https://www.instagram.com/mdemike__/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#ig)"/><rect x="6.4" y="6.4" width="11.2" height="11.2" rx="3.6" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="#fff"/></svg>
-        @mdemike__
-      </a>
-      <a href="https://www.linkedin.com/in/miquel-771450156/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24"><rect x="1.5" y="1.5" width="21" height="21" rx="3" fill="#0A66C2"/><path fill="#fff" d="M7.1 9.4v8.1H4.4V9.4zM5.75 5.6a1.57 1.57 0 1 1 0 3.14 1.57 1.57 0 0 1 0-3.14M9 9.4h2.6v1.1h.04c.36-.68 1.25-1.4 2.57-1.4 2.75 0 3.26 1.81 3.26 4.17v4.23h-2.72v-3.75c0-.9-.02-2.05-1.25-2.05-1.25 0-1.44.98-1.44 1.98v3.82H9z"/></svg>
-        LinkedIn
-      </a>
-    </div>
+    <header class="me">
+      <!--
+        TU FOTO:
+        1. Guarda tu foto en esta misma carpeta, p. ej. "miquel.jpg"
+           (cuadrada, mínimo 192×192 px, se recorta en círculo sola).
+        2. Cambia el src de abajo por: src="miquel.jpg"
+        Ahora mismo muestra un círculo gris de relleno.
+      -->
+      <img
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23e2ded5'/%3E%3Ccircle cx='24' cy='19' r='8' fill='%23b9b2a4'/%3E%3Cpath d='M8 44c2-9 8-13 16-13s14 4 16 13' fill='%23b9b2a4'/%3E%3C/svg%3E"
+        alt="Miquel Subias" width="48" height="48">
+      <div>
+        <div class="me-name" data-site="name">Miquel Subias</div>
+        <div class="me-where" data-site="location">Cervera, Catalonia</div>
+      </div>
+    </header>
 
-    <p class="intro">Ex-SaaS sales turned builder in Barcelona. Sharing the messy road as I go.</p>
+    <h1>I build <em>things</em> I&nbsp;wish existed.</h1>
 
-    <div class="projects">
-      <a href="https://yumlist.app" target="_blank" rel="noopener">
-        <span class="dot yumdot"></span>Yumlist<span class="arr">↗</span>
-      </a>
-      <span class="sep">·</span>
-      <a href="https://lavirage.vercel.app" target="_blank" rel="noopener">
-        <span class="dot vdot"></span>La Virage Club<span class="arr">↗</span>
-      </a>
-    </div>
+    <p class="intro">Ex-SaaS sales turned builder, now based in Cervera. Sharing the <em>messy</em> road as I go.</p>
 
-    <form id="f" novalidate>
-      <input type="email" id="email" placeholder="you@email.com" required aria-label="Email">
-      <button type="submit">Subscribe</button>
-    </form>
-    <div class="msg" id="msg">Occasional notes on what I'm building.</div>
+    <section aria-labelledby="projects-label">
+      <h2 class="label" id="projects-label">Currently building</h2>
+      <ul class="projects" id="projects"></ul>
+    </section>
 
-    <div class="foot">© 2026 Miquel · Barcelona</div>
+    <nav aria-label="Social">
+      <ul class="socials" id="socials"></ul>
+    </nav>
+
+    <footer class="foot">
+      © <span id="year"></span> <span data-site="name">Miquel Subias</span> · <span data-site="location">Cervera, Catalonia</span>
+    </footer>
+
   </main>
 
+<!-- Contenido editable: proyectos y redes -->
+<script src="data.js"></script>
 <script>
-  var form = document.getElementById('f');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var email = document.getElementById('email').value.trim();
-    var msg = document.getElementById('msg');
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
-      msg.textContent = 'That email looks off — mind checking it?';
-      msg.classList.remove('ok');
-      return;
+  (function(){
+    var site = window.SITE || {};
+
+    // Iconos de redes (monocromo, heredan el color del texto)
+    var ICONS = {
+      youtube:'<path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.7-1.7C19.4 5.2 12 5.2 12 5.2s-7.4 0-8.9.4A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.7 1.7c1.5.4 8.9.4 8.9.4s7.4 0 8.9-.4a2.5 2.5 0 0 0 1.7-1.7C23 15.2 23 12 23 12zM9.8 15.3V8.7l5.7 3.3z"/>',
+      x:'<path d="M18.9 1.6h3.5l-7.6 8.7L23.7 22h-7l-5.5-7.2L4.9 22H1.4l8.1-9.3L.6 1.6h7.2l5 6.6zm-1.2 18.3h1.9L6.9 3.6H4.8z"/>',
+      instagram:'<path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/>',
+      linkedin:'<path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.5H3.6V9h3.5v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/>',
+      github:'<path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/>',
+      tiktok:'<path d="M12.5 0h4c.2 2 1 3.6 2.4 4.6 1 .7 2.2 1.1 3.6 1.2v4a10 10 0 0 1-5.9-1.9v8.4a7.7 7.7 0 1 1-7.7-7.7c.4 0 .9 0 1.3.1v4.1a3.7 3.7 0 1 0 2.4 3.5V0z"/>',
+      email:'<path d="M2 4h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.5l10 6.2 10-6.2V6H2zm20 2.8-10 6.2-10-6.2V18h20V8.8z"/>'
+    };
+
+    function esc(s){
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
     }
-    // TODO: connect your email provider (Buttondown, Formspree, ConvertKit…)
-    form.style.display = 'none';
-    msg.textContent = "You're on the list. Talk soon.";
-    msg.classList.add('ok');
-  });
+
+    // Texto oscuro o claro sobre el color de marca, según contraste
+    function inkFor(hex){
+      var h = String(hex).replace('#','');
+      if(h.length === 3) h = h.replace(/./g,'$&$&');
+      var rgb = [0,2,4].map(function(i){
+        var v = parseInt(h.substr(i,2),16)/255;
+        return v <= .03928 ? v/12.92 : Math.pow((v+.055)/1.055, 2.4);
+      });
+      var L = .2126*rgb[0] + .7152*rgb[1] + .0722*rgb[2];
+      return (L + .05)/(.0103 + .05) >= (1.05)/(L + .05) ? '#1a1a18' : '#ffffff';
+    }
+
+    // Nombre y ubicación
+    document.querySelectorAll('[data-site]').forEach(function(el){
+      var v = site[el.getAttribute('data-site')];
+      if(v) el.textContent = v;
+    });
+
+    // Proyectos
+    document.getElementById('projects').innerHTML = (site.projects || []).map(function(p){
+      var c = p.color || '#888888';
+      return '<li><a class="project" href="' + esc(p.url) + '" target="_blank" rel="noopener"' +
+        ' style="--c:' + esc(c) + ';--mark-ink:' + inkFor(c) + '">' +
+        '<span class="project-mark" aria-hidden="true">' + esc((p.name || '?').charAt(0)) + '</span>' +
+        '<span class="project-text">' +
+          '<span class="project-name">' + esc(p.name) + '</span>' +
+          (p.description ? '<span class="project-desc">' + esc(p.description) + '</span>' : '') +
+        '</span>' +
+        '<span class="project-arrow" aria-hidden="true">↗</span>' +
+      '</a></li>';
+    }).join('');
+
+    // Redes
+    document.getElementById('socials').innerHTML = (site.socials || []).map(function(s){
+      var icon = ICONS[s.icon] ? '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' + ICONS[s.icon] + '</svg>' : '';
+      var ext = /^https?:/.test(s.url || '') ? ' target="_blank" rel="noopener"' : '';
+      return '<li><a href="' + esc(s.url) + '"' + ext + '>' + icon + esc(s.label) + '</a></li>';
+    }).join('');
+
+    // Año automático
+    document.getElementById('year').textContent = new Date().getFullYear();
+  })();
 </script>
 </body>
 </html>
