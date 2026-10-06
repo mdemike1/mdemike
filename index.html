@@ -92,10 +92,11 @@
     font-weight:700;
     letter-spacing:-.04em;
     line-height:1;
-    margin-bottom:var(--s5);
+    margin-bottom:clamp(32px,4vw,40px);  /* aire titular → párrafo: 32px en móvil, 40px en escritorio */
     text-wrap:balance;
   }
-  h1 em{font-size:1.1em;line-height:.9}
+  /* un pelín de aire alrededor de la cursiva (la serif inclinada se pega a la palabra de al lado) */
+  h1 em{font-size:1.1em;line-height:.9;margin:0 .07em 0 .03em}
 
   /* ---------- story: párrafo narrativo con los proyectos inline ---------- */
   .story{
@@ -105,7 +106,7 @@
     letter-spacing:-.01em;
     margin-bottom:var(--s8);
   }
-  .story em{color:var(--ink);font-size:1.12em;line-height:1;white-space:nowrap}
+  .story em{color:var(--ink);font-size:1.12em;line-height:1;white-space:nowrap;margin:0 .06em 0 .03em}
   .story a{
     color:var(--ink);
     font-weight:600;
@@ -165,7 +166,7 @@
 
   @media (max-width:480px){
     .wrap{padding:var(--s7) var(--s4) var(--s6)}
-    .me{margin-bottom:var(--s7)}
+    .me{margin-bottom:56px}  /* algo más que titular→párrafo, para que la cabecera se lea como bloque aparte */
     .story{margin-bottom:var(--s7)}
     .socials{margin-bottom:var(--s8)}
   }
