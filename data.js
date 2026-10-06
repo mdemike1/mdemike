@@ -33,8 +33,9 @@ window.SITE = {
   //   *palabras*   → entre asteriscos = cursiva serif (acento).
   //                  Úsalo con moderación: 2-4 acentos como mucho.
   // ----------------------------------------------------------
-  story: "{yumlist} so friends share restaurant recs they *actually* trust, " +
-         "and {lavirage} where I throw *car races* for real. " +
+  story: "Two things I'm building right now: " +
+         "{yumlist} so friends share restaurant recs they *actually* trust, " +
+         "and {lavirage} where I put on *car races*. " +
          "Ex-SaaS sales turned builder, based in Cervera. " +
          "Sharing the *messy* road as I go.",
 
