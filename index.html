@@ -6,8 +6,8 @@
 <title>Miquel Subias — Building Yumlist &amp; La Virage Club</title>
 <meta name="description" content="Miquel Subias — I build things I wish existed. Building Yumlist and La Virage Club from Cervera, Catalonia.">
 <link rel="canonical" href="https://mdemike.com/">
-<meta name="theme-color" content="#f7f5f0">
-<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#0a0a0b">
+<meta name="color-scheme" content="dark">
 <!-- Favicon: "m" crema sobre cuadro oscuro -->
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -23,21 +23,19 @@
 <style>
   :root{
     /* color */
-    --bg:#f7f5f0;          /* hueso */
-    --ink:#1a1a18;         /* texto principal — 16.6:1 sobre --bg */
-    --muted:#5a564e;       /* texto secundario — 6.7:1 sobre --bg */
-    --line:#e2ded5;
-    --line-strong:#cfc9bd;
+    --bg:#0a0a0b;          /* casi negro */
+    --fg:#f6f5f3;          /* texto principal — 18.6:1 sobre --bg */
+    --dim:#9a9894;         /* texto secundario — 6.9:1 sobre --bg (pasa AA) */
+    /* --dimmer (#5c5a57) daría 2.8:1 y no pasa AA → no se usa para texto */
+    --line:rgba(255,255,255,.1);
 
     /* type */
     --sans:'Inter',system-ui,-apple-system,sans-serif;
     --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
 
-    /* spacing — múltiplos de 4/8 */
+    /* spacing — escala de 4/8 */
     --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
-    --s6:32px; --s7:48px; --s8:64px; --s9:96px;
-
-    --radius:16px;
+    --s6:32px; --s7:40px; --s8:48px; --s9:64px; --s10:96px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -45,18 +43,24 @@
     font-family:var(--sans);
     font-size:16px;
     background:var(--bg);
-    color:var(--ink);
+    color:var(--fg);
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
+    min-height:100dvh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:var(--s9) var(--s5);
   }
   a{color:inherit}
-  a:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:4px}
+  a:focus-visible{outline:2px solid var(--fg);outline-offset:4px;border-radius:4px}
 
   .wrap{
-    max-width:680px;
+    width:100%;
+    max-width:640px;
     margin:0 auto;
-    padding:var(--s8) var(--s5) var(--s7);
+    text-align:center;
     animation:rise .8s cubic-bezier(.2,.7,.2,1) both;
   }
   @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -69,76 +73,79 @@
     letter-spacing:0;
   }
 
-  /* ---------- identity ---------- */
-  .me{
-    display:flex;
-    align-items:center;
-    gap:var(--s3);
-    margin-bottom:var(--s8);
+  /* ---------- logo "m" ---------- */
+  .logo{
+    display:grid;
+    place-items:center;
+    width:52px;height:52px;
+    margin:0 auto var(--s7);
+    border-radius:14px;
+    background:var(--fg);
+    color:var(--bg);
+    font-family:Georgia,'Times New Roman',serif;  /* la misma que el favicon */
+    font-style:italic;
+    font-size:38px;
+    line-height:1;
+    padding-bottom:.14em;   /* centra ópticamente la "m" (no tiene ascendentes) */
+    user-select:none;
   }
-  .me img{
-    width:48px;height:48px;
-    border-radius:50%;
-    object-fit:cover;
-    background:var(--line);
-    flex-shrink:0;
-  }
-  .me-name{font-weight:600;line-height:1.25}
-  .me-where{color:var(--muted);font-size:14px;line-height:1.25;margin-top:2px}
 
   /* ---------- thesis ---------- */
   h1{
-    font-size:clamp(44px,10vw,80px);
+    font-size:clamp(38px,8vw,64px);
     font-weight:700;
-    letter-spacing:-.04em;
-    line-height:1;
-    margin-bottom:clamp(32px,4vw,40px);  /* aire titular → párrafo: 32px en móvil, 40px en escritorio */
+    letter-spacing:-.03em;
+    line-height:1.05;
+    margin-bottom:var(--s7);
     text-wrap:balance;
   }
-  /* un pelín de aire alrededor de la cursiva (la serif inclinada se pega a la palabra de al lado) */
-  h1 em{font-size:1.1em;line-height:.9;margin:0 .07em 0 .03em}
+  /* aire alrededor de la cursiva: algo más a la derecha, la serif inclinada se echa hacia ese lado */
+  h1 em{font-size:1.1em;line-height:.9;margin:0 .08em 0 .04em}
 
   /* ---------- story: párrafo narrativo con los proyectos inline ---------- */
   .story{
-    font-size:clamp(20px,3vw,24px);
-    color:var(--muted);
+    font-size:18px;
+    color:var(--dim);
     line-height:1.6;
-    letter-spacing:-.01em;
-    margin-bottom:var(--s8);
+    max-width:36em;
+    margin:0 auto var(--s7);
+    text-wrap:pretty;
   }
-  .story em{color:var(--ink);font-size:1.12em;line-height:1;white-space:nowrap;margin:0 .06em 0 .03em}
+  .story em{color:var(--fg);font-size:1.15em;line-height:1;white-space:nowrap;margin:0 .06em 0 .04em}
   .story a{
-    color:var(--ink);
+    color:var(--fg);
     font-weight:600;
     text-decoration:none;
     white-space:nowrap;
     background-image:linear-gradient(currentColor,currentColor);
-    background-size:0 1.5px;
+    background-size:0 1px;
     background-position:0 100%;
     background-repeat:no-repeat;
     transition:background-size .2s ease;
   }
-  @media (hover:hover){.story a:hover{background-size:100% 1.5px}}
+  @media (hover:hover){.story a:hover{background-size:100% 1px}}
   /* cuadradito de color con la inicial, antes del nombre del proyecto */
   .mark{
-    display:inline-grid;
-    place-items:center;
-    width:1.1em;height:1.1em;
-    margin-right:.3em;
-    border-radius:.24em;
+    display:inline-block;
+    width:1.05em;height:1.05em;
+    margin-right:.35em;
+    border-radius:.25em;
     background:var(--c);
     color:var(--mark-ink,#fff);
     font-family:var(--serif);
     font-style:italic;
     font-weight:400;
-    line-height:1;
-    vertical-align:-.18em;
+    font-size:1em;
+    line-height:1.05em;
+    text-align:center;
+    vertical-align:-.16em;  /* centrado con la altura de las mayúsculas, sin descuadrar la línea */
   }
 
   /* ---------- socials ---------- */
   .socials{
     list-style:none;
     display:flex;
+    justify-content:center;
     flex-wrap:wrap;
     gap:var(--s2) var(--s5);
     margin-bottom:var(--s9);
@@ -149,25 +156,25 @@
     gap:var(--s2);
     padding:var(--s1) 0;
     text-decoration:none;
-    color:var(--muted);
+    color:var(--dim);
     font-size:16px;
     transition:color .16s ease;
   }
   .socials svg{width:16px;height:16px;flex-shrink:0}
-  @media (hover:hover){.socials a:hover{color:var(--ink)}}
+  @media (hover:hover){.socials a:hover{color:var(--fg)}}
 
   /* ---------- footer ---------- */
   .foot{
-    padding-top:var(--s5);
-    border-top:1px solid var(--line);
     font-size:14px;
-    color:var(--muted);
+    color:var(--dim);
   }
+  .foot span{white-space:nowrap}  /* si no cabe, corta en el "·" y no a mitad de nombre */
 
   @media (max-width:480px){
-    .wrap{padding:var(--s7) var(--s4) var(--s6)}
-    .me{margin-bottom:56px}  /* algo más que titular→párrafo, para que la cabecera se lea como bloque aparte */
-    .story{margin-bottom:var(--s7)}
+    body{padding:var(--s8) var(--s5)}
+    .logo{margin-bottom:var(--s6)}
+    h1{margin-bottom:var(--s6)}
+    .story{font-size:17px;margin-bottom:var(--s7)}
     .socials{margin-bottom:var(--s8)}
   }
 
@@ -177,22 +184,7 @@
 <body>
   <main class="wrap">
 
-    <header class="me">
-      <!--
-        TU FOTO:
-        1. Guarda tu foto en esta misma carpeta, p. ej. "miquel.jpg"
-           (cuadrada, mínimo 192×192 px, se recorta en círculo sola).
-        2. Cambia el src de abajo por: src="miquel.jpg"
-        Ahora mismo muestra un círculo gris de relleno.
-      -->
-      <img
-        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23e2ded5'/%3E%3Ccircle cx='24' cy='19' r='8' fill='%23b9b2a4'/%3E%3Cpath d='M8 44c2-9 8-13 16-13s14 4 16 13' fill='%23b9b2a4'/%3E%3C/svg%3E"
-        alt="Miquel Subias" width="48" height="48">
-      <div>
-        <div class="me-name" data-site="name">Miquel Subias</div>
-        <div class="me-where" data-site="location">Cervera, Catalonia</div>
-      </div>
-    </header>
+    <div class="logo" aria-hidden="true">m</div>
 
     <h1>I build <em>things</em> I&nbsp;wish existed.</h1>
 
