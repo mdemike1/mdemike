@@ -8,7 +8,8 @@
   - Cada elemento va entre { } y separado por una coma.
   - Los textos van entre comillas "así".
   - Para añadir un proyecto o una red: copia un bloque { ... },
-    pégalo debajo y cambia los valores.
+    pégalo debajo y cambia los valores. (Un proyecto nuevo,
+    además, hay que mencionarlo en el párrafo con su {id}.)
   - Para quitar uno: borra su bloque { ... } entero (con su coma).
   - El orden de la lista = el orden en la web.
   ============================================================
@@ -23,31 +24,48 @@ window.SITE = {
   location: "Cervera, Catalonia",
 
   // ----------------------------------------------------------
-  // PROYECTOS — los protagonistas de la página
+  // PÁRRAFO NARRATIVO — va debajo del titular grande
   // ----------------------------------------------------------
-  // name:        nombre del proyecto
-  // description: una frase corta que explique qué es
-  // url:         enlace (con https://)
-  // color:       color de marca en hex. Se usa para el fondo
-  //              tintado de la tarjeta y el cuadrado con la inicial.
+  // Es texto normal, con dos "códigos" especiales:
+  //   {yumlist}    → mete ahí el proyecto con ese id (ver lista
+  //                  de PROYECTOS abajo): cuadradito de color con
+  //                  la inicial + nombre en negrita y enlazado.
+  //   *palabras*   → entre asteriscos = cursiva serif (acento).
+  //                  Úsalo con moderación: 2-4 acentos como mucho.
+  // ----------------------------------------------------------
+  story: "{yumlist} so friends share restaurant recs they *actually* trust, " +
+         "and {lavirage} where I throw *car races* for real. " +
+         "Ex-SaaS sales turned builder, based in Cervera. " +
+         "Sharing the *messy* road as I go.",
+
+  // ----------------------------------------------------------
+  // PROYECTOS — se usan dentro del párrafo de arriba
+  // ----------------------------------------------------------
+  // id:    nombre corto para usarlo en el párrafo como {id}
+  //        (sin espacios ni acentos). Un proyecto que no
+  //        aparezca en el párrafo no se muestra.
+  // name:  nombre del proyecto (la inicial sale en el cuadradito)
+  // url:   enlace (con https://)
+  // color: color de marca en hex, para el cuadradito. La letra
+  //        sale blanca u oscura sola, según qué se lea mejor.
   // ----------------------------------------------------------
   projects: [
     {
+      id: "yumlist",
       name: "Yumlist",
-      description: "The BeReal of restaurants — recommendations you can trust.",
       url: "https://www.yumlist.app/",
       color: "#e07a4c"
     },
     {
+      id: "lavirage",
       name: "La Virage Club",
-      description: "A new kind of event in the rally world.",
       url: "https://www.lavirageclub.com/",
       color: "#d81f26"
     }
   ],
 
   // ----------------------------------------------------------
-  // REDES — aparecen debajo de los proyectos, más discretas
+  // REDES — aparecen debajo del párrafo, más discretas
   // ----------------------------------------------------------
   // icon:  uno de estos → "youtube", "x", "instagram", "linkedin",
   //        "github", "tiktok", "email". (Si pones otro, sale sin icono.)

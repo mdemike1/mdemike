@@ -97,81 +97,42 @@
   }
   h1 em{font-size:1.1em;line-height:.9}
 
-  .intro{
-    font-size:clamp(18px,2.6vw,20px);
+  /* ---------- story: párrafo narrativo con los proyectos inline ---------- */
+  .story{
+    font-size:clamp(20px,3vw,24px);
     color:var(--muted);
-    line-height:1.55;
-    max-width:34ch;
+    line-height:1.6;
+    letter-spacing:-.01em;
     margin-bottom:var(--s8);
   }
-  .intro em{color:var(--ink);font-size:1.12em}
-
-  /* ---------- projects ---------- */
-  .label{
-    font-size:13px;
-    font-weight:500;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:var(--s4);
-  }
-  .projects{
-    list-style:none;
-    display:grid;
-    gap:var(--s3);
-    margin-bottom:var(--s8);
-  }
-  .project{
-    --c:#888;
-    display:flex;
-    align-items:center;
-    gap:var(--s4);
-    padding:var(--s4);
-    padding-right:var(--s5);
+  .story em{color:var(--ink);font-size:1.12em;line-height:1;white-space:nowrap}
+  .story a{
+    color:var(--ink);
+    font-weight:600;
     text-decoration:none;
-    border-radius:var(--radius);
-    background:color-mix(in srgb,var(--c) 10%,var(--bg));
-    border:1px solid color-mix(in srgb,var(--c) 28%,var(--bg));
-    transition:background .2s ease,transform .2s ease;
+    white-space:nowrap;
+    background-image:linear-gradient(currentColor,currentColor);
+    background-size:0 1.5px;
+    background-position:0 100%;
+    background-repeat:no-repeat;
+    transition:background-size .2s ease;
   }
-  .project-mark{
-    width:56px;height:56px;
-    border-radius:12px;
+  @media (hover:hover){.story a:hover{background-size:100% 1.5px}}
+  /* cuadradito de color con la inicial, antes del nombre del proyecto */
+  .mark{
+    display:inline-grid;
+    place-items:center;
+    width:1.1em;height:1.1em;
+    margin-right:.3em;
+    border-radius:.24em;
     background:var(--c);
     color:var(--mark-ink,#fff);
-    display:grid;
-    place-items:center;
     font-family:var(--serif);
     font-style:italic;
-    font-size:36px;
+    font-weight:400;
     line-height:1;
-    flex-shrink:0;
+    vertical-align:-.18em;
   }
-  .project-text{flex:1;min-width:0}
-  .project-name{
-    display:block;
-    font-size:20px;
-    font-weight:600;
-    letter-spacing:-.015em;
-    line-height:1.3;
-  }
-  .project-desc{
-    display:block;
-    color:var(--muted);
-    font-size:16px;
-    line-height:1.45;
-    margin-top:2px;
-  }
-  .project-arrow{
-    font-size:20px;
-    flex-shrink:0;
-    transition:transform .2s ease;
-  }
-  @media (hover:hover){
-    .project:hover{background:color-mix(in srgb,var(--c) 18%,var(--bg))}
-    .project:hover .project-arrow{transform:translate(3px,-3px)}
-  }
-  .project:active{transform:scale(.99)}
 
   /* ---------- socials ---------- */
   .socials{
@@ -205,11 +166,8 @@
   @media (max-width:480px){
     .wrap{padding:var(--s7) var(--s4) var(--s6)}
     .me{margin-bottom:var(--s7)}
-    .intro,.projects{margin-bottom:var(--s7)}
+    .story{margin-bottom:var(--s7)}
     .socials{margin-bottom:var(--s8)}
-    .project{gap:var(--s3);padding:var(--s3);padding-right:var(--s4)}
-    .project-mark{width:48px;height:48px;font-size:30px;border-radius:10px}
-    .project-name{font-size:18px}
   }
 
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -237,12 +195,8 @@
 
     <h1>I build <em>things</em> I&nbsp;wish existed.</h1>
 
-    <p class="intro">Ex-SaaS sales turned builder, now based in Cervera. Sharing the <em>messy</em> road as I go.</p>
-
-    <section aria-labelledby="projects-label">
-      <h2 class="label" id="projects-label">Currently building</h2>
-      <ul class="projects" id="projects"></ul>
-    </section>
+    <!-- Párrafo narrativo con los proyectos: el texto se edita en data.js -->
+    <p class="story" id="story"></p>
 
     <nav aria-label="Social">
       <ul class="socials" id="socials"></ul>
@@ -254,7 +208,7 @@
 
   </main>
 
-<!-- Contenido editable: proyectos y redes -->
+<!-- Contenido editable: párrafo, proyectos y redes -->
 <script src="data.js"></script>
 <script>
   (function(){
@@ -295,19 +249,21 @@
       if(v) el.textContent = v;
     });
 
-    // Proyectos
-    document.getElementById('projects').innerHTML = (site.projects || []).map(function(p){
+    // Enlace de proyecto inline: cuadradito con la inicial + nombre en negrita
+    function projectLink(p){
       var c = p.color || '#888888';
-      return '<li><a class="project" href="' + esc(p.url) + '" target="_blank" rel="noopener"' +
+      return '<a href="' + esc(p.url) + '" target="_blank" rel="noopener"' +
         ' style="--c:' + esc(c) + ';--mark-ink:' + inkFor(c) + '">' +
-        '<span class="project-mark" aria-hidden="true">' + esc((p.name || '?').charAt(0)) + '</span>' +
-        '<span class="project-text">' +
-          '<span class="project-name">' + esc(p.name) + '</span>' +
-          (p.description ? '<span class="project-desc">' + esc(p.description) + '</span>' : '') +
-        '</span>' +
-        '<span class="project-arrow" aria-hidden="true">↗</span>' +
-      '</a></li>';
-    }).join('');
+        '<span class="mark" aria-hidden="true">' + esc((p.name || '?').charAt(0)) + '</span>' +
+        esc(p.name) + '</a>';
+    }
+
+    // Párrafo narrativo: {id} → proyecto, *texto* → cursiva serif
+    var projects = {};
+    (site.projects || []).forEach(function(p){ projects[p.id] = p; });
+    document.getElementById('story').innerHTML = esc(site.story)
+      .replace(/\{([\w-]+)\}/g, function(m, id){ return projects[id] ? projectLink(projects[id]) : m; })
+      .replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
     // Redes
     document.getElementById('socials').innerHTML = (site.socials || []).map(function(s){
